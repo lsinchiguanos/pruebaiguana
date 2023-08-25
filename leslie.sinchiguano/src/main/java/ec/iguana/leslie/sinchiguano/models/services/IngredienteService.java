@@ -1,5 +1,6 @@
 package ec.iguana.leslie.sinchiguano.models.services;
 
+import ec.iguana.leslie.sinchiguano.exceptions.MessageInfo;
 import ec.iguana.leslie.sinchiguano.models.entity.Ingrediente;
 import ec.iguana.leslie.sinchiguano.models.repositories.IIngredienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;

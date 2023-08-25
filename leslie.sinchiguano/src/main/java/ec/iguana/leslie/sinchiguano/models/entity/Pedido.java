@@ -7,8 +7,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
 
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -29,36 +29,37 @@ public class Pedido {
     @JoinColumn(name = "idPersona", nullable = false)
     private Persona persona;
 
-    @NotNull
+    @NotNull(message = "${campo.requiered}")
+    @NotBlank(message = "${campo.no.vacio}")
     @Column(name = "fechaPedido", nullable = false, insertable = false, columnDefinition = "timestamp default CURRENT_TIMESTAMP")
     private Date fechaPedido;
 
-    @NotNull
-    @NotEmpty
+    @NotNull(message = "${campo.requiered}")
+    @NotBlank(message = "${campo.no.vacio}")
     @Column(name = "numeroPedido", nullable = false, length = 200, unique = true)
     private String numeroPedido;
 
-    @NotNull
-    @NotEmpty
-    @Min(value = 0)
+    @NotNull(message = "${campo.requiered}")
+    @NotBlank(message = "${campo.no.vacio}")
+    @DecimalMin(value = "0.00", message = "${campo.minimo} 0.00")
     @Column(name = "subTotalPedido", nullable = false, precision = 8, scale = 4)
     private BigDecimal subTotalPedido;
 
-    @NotNull
-    @NotEmpty
-    @Min(value = 0)
+    @NotNull(message = "${campo.requiered}")
+    @NotBlank(message = "${campo.no.vacio}")
+    @DecimalMin(value = "0.00", message = "${campo.minimo} 0.00")
     @Column(name = "ivaPedido", nullable = false, precision = 8, scale = 4)
     private BigDecimal ivaPedido;
 
-    @NotNull
-    @NotEmpty
-    @Min(value = 0)
+    @NotNull(message = "${campo.requiered}")
+    @NotBlank(message = "${campo.no.vacio}")
+    @DecimalMin(value = "0.00", message = "${campo.minimo} 0.00")
     @Column(name = "totalPedido", nullable = false, precision = 8, scale = 4)
     private BigDecimal totalPedido;
 
-    @NotNull
-    @NotEmpty
-    @Min(value = 0)
+    @NotNull(message = "${campo.requiered}")
+    @NotBlank(message = "${campo.no.vacio}")
+    @DecimalMin(value = "0.00", message = "${campo.minimo} 0.00")
     @Column(name = "propinaPedido", nullable = false, precision = 8, scale = 4)
     private BigDecimal propinaPedido;
 

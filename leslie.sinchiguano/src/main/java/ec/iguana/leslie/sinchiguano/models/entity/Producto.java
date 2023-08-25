@@ -1,14 +1,16 @@
 package ec.iguana.leslie.sinchiguano.models.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.DecimalMin;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
+
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.Length;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -25,20 +27,22 @@ public class Producto {
     @Column(name = "idProducto")
     private Integer idProducto;
 
-    @NotNull
-    @NotEmpty
+    @NotNull(message = "${campo.requiered}")
+    @NotBlank(message = "${campo.no.vacio}")
+    @Length(max = 200, message = "${campo.maximo.caracteres} 200")
+    @Length(min = 2, message = "${campo.minimo.caracteres} 2")
     @Column(name = "nombreProducto", nullable = false, length = 200, unique = true)
     private String nombreProducto;
 
-    @NotNull
-    @NotEmpty
-    @Min(value = 0)
+    @NotNull(message = "${campo.requiered}")
+    @NotBlank(message = "${campo.no.vacio}")
+    @DecimalMin(value = "0.00", message = "${campo.minimo} 0.00")
     @Column(name = "valorProducto", nullable = false, precision = 8, scale = 4)
     private BigDecimal valorProducto;
 
-    @NotNull
-    @NotEmpty
-    @Min(value = 0)
+    @NotNull(message = "${campo.requiered}")
+    @NotBlank(message = "${campo.no.vacio}")
+    @DecimalMin(value = "0.00", message = "${campo.minimo} 0.00")
     @Column(name = "porcentajeProducto", nullable = false, precision = 8, scale = 4)
     private BigDecimal porcentajeProducto;
 

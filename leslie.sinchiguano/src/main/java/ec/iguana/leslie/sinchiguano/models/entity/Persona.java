@@ -1,13 +1,16 @@
 package ec.iguana.leslie.sinchiguano.models.entity;
 
 import jakarta.persistence.*;
+
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
-import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.Length;
+
 import java.util.Date;
 
 @Data
@@ -24,23 +27,27 @@ public class Persona {
     @Column(name = "idPersona")
     private Integer idPersona;
 
+    @NotNull(message = "${campo.requiered}")
+    @NotBlank(message = "${campo.no.vacio}")
     @Column(name = "identificacionPersona", nullable = false, length = 13, unique = true)
-    @NotNull
-    @NotEmpty
     private String identificacionPersona;
 
-    @NotNull
-    @NotEmpty
+    @NotNull(message = "${campo.requiered}")
+    @NotBlank(message = "${campo.no.vacio}")
+    @Length(max = 200, message = "${campo.maximo.caracteres} 200")
+    @Length(min = 2, message = "${campo.minimo.caracteres} 2")
     @Column(name = "nombrePersona", nullable = false, length = 200)
     private String nombrePersona;
 
-    @NotNull
-    @NotEmpty
+    @NotNull(message = "${campo.requiered}")
+    @NotBlank(message = "${campo.no.vacio}")
+    @Length(max = 200, message = "${campo.maximo.caracteres} 200")
+    @Length(min = 2, message = "${campo.minimo.caracteres} 2")
     @Column(name = "apellidoPersona", nullable = false, length = 200)
     private String apellidoPersona;
 
-    @NotNull
-    @NotEmpty
+    @NotNull(message = "${campo.requiered}")
+    @NotBlank(message = "${campo.no.vacio}")
     @Column(name = "contactoPersona", nullable = false, length = 50)
     private String contactoPersona;
 
